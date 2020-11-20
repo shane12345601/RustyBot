@@ -16,7 +16,6 @@ async def ping(context):
 @client.command(name='clear', help='To delete a specified amount of messages.')
 async def clear(context, amount: int):
     await context.channel.purge(limit=amount)
-    #await context.message.channel.send("This command is currently unavailable!")
 
 @clear.error
 async def clear_error(context, error):
@@ -48,7 +47,6 @@ async def search(context):
     ebd.add_field(name='Problem: ', value=problem, inline=False)
 
     await context.message.channel.send(embed=ebd)
-
 
 @client.command(name='search', help='To find porn')
 async def search(context, searchTerm):
@@ -87,9 +85,12 @@ async def search_error(context, error):
 @client.event
 async def on_ready():
     general_channel = client.get_channel(778697177915588610)
-    await client.change_presence(activity=discord.Game('?help for commands'))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="?help for commands"))
     await general_channel.send("Pesheng weng weng")
 
-
+@client.event
+async def on_command_error(context, error):
+    if isinstance(error, commands.CommandNotFound):
+        await context.message.channel.send("Invalid Command")
 
 client.run("Nzc4Njk1NDM2NzAxMjcwMDQ4.X7Vuow.eJQ6ADSDXmqeeqigA3Xgr-2WH4I")
