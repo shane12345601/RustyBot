@@ -9,6 +9,13 @@ api = PornhubApi()
 
 client = commands.Bot(command_prefix='?')
 
+@client.command(name='meme', help='For random meme')
+async def meme(context):
+    response = requests.get('https://meme-api.herokuapp.com/gimme')
+    response = response.json()
+    await context.message.channel.send(response['url'])
+
+
 @client.command(name='joke', help='For random joke')
 async def joke(context):
     rply = requests.get('https://sv443.net/jokeapi/v2/joke/Any?type=single')

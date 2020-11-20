@@ -1,7 +1,7 @@
 import requests
 
-response = requests.get("https://sv443.net/jokeapi/v2/joke/Any?type=single")
+response = requests.get('https://meme-api.herokuapp.com/gimme')
 
 response = response.json()
 
-print(response['joke'])
+print(response['url'])
