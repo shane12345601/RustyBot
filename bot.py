@@ -91,4 +91,4 @@ async def on_ready():
 
 
 
-client.run("Nzc4Njk1NDM2NzAxMjcwMDQ4.X7Vuow.zS-vwdixyO0W9dAGwbZnr28JUXY")
+client.run("Nzc4Njk1NDM2NzAxMjcwMDQ4.X7Vuow.eJQ6ADSDXmqeeqigA3Xgr-2WH4I")
