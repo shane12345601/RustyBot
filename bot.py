@@ -1,8 +1,9 @@
 import discord
 from discord.ext import commands, tasks
-import pornhub_api
-from pornhub_api import PornhubApi
+#import pornhub_api
+#from pornhub_api import PornhubApi
 import imaplib, email, quopri
+from pornhub.pornhub_api import PornhubApi
 
 api = PornhubApi()
 
