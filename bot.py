@@ -20,7 +20,10 @@ async def meme(context):
 async def joke(context):
     rply = requests.get('https://sv443.net/jokeapi/v2/joke/Any?type=single')
     rply = rply.json()
-    await context.message.channel.send(rply['joke'])
+    msg = rply['joke']
+    ebd = discord.Embed(colour=discord.Colour.dark_purple())
+    ebd.add_field(name='Joke: ', value=msg, inline=False)
+    await context.message.channel.send(embed=ebd)
 
 @client.command(name='ping', help='To show latency of bot')
 async def ping(context):
@@ -94,6 +97,7 @@ async def search(context, searchTerm):
 async def search_error(context, error):
     if isinstance(error, commands.MissingRequiredArgument):
         await context.message.channel.send("Invalid input")
+
 
 @client.event
 async def on_ready():

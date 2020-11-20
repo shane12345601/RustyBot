@@ -1,7 +1,12 @@
 import requests
 
-response = requests.get('https://meme-api.herokuapp.com/gimme')
+link ='http://yoda-api.appspot.com/api/v1/yodish?text='
+
+quote = "Shane is a shit riven"
+
+response = requests.get(f'http://yoda-api.appspot.com/api/v1/yodish?text={quote}')
 
 response = response.json()
 
-print(response['url'])
+print(response['yodish'])
+
