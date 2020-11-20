@@ -47,7 +47,7 @@ async def search(context):
     mail.select('"CodingProblems"')
     result, data = mail.uid('search', None, "ALL")
     msgs = data[0].split()
-    most_recent = msgs[0]
+    most_recent = msgs[-1]
     result, data = mail.fetch(most_recent, '(RFC822)')
     raw = data[0][1]
     decoded = quopri.decodestring(raw)
