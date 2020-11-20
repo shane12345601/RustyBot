@@ -2,12 +2,18 @@ import discord
 from discord.ext import commands, tasks
 #import pornhub_api
 #from pornhub_api import PornhubApi
-import imaplib, email, quopri
+import imaplib, email, quopri, requests
 from pornhub.pornhub_api import PornhubApi
 
 api = PornhubApi()
 
 client = commands.Bot(command_prefix='?')
+
+@client.command(name='joke', help='For random joke')
+async def joke(context):
+    rply = requests.get('https://sv443.net/jokeapi/v2/joke/Any?type=single')
+    rply = rply.json()
+    await context.message.channel.send(rply['joke'])
 
 @client.command(name='ping', help='To show latency of bot')
 async def ping(context):

@@ -1,15 +1,7 @@
-from urllib.request import Request, urlopen
-from bs4 import BeautifulSoup as soup
+import requests
 
-page_url = 'https://www.chegg.com/homework-help/questions-and-answers/python-programming-q25481936'
+response = requests.get("https://sv443.net/jokeapi/v2/joke/Any?type=single")
 
-req = Request(page_url, headers={'User-Agent': 'XYZ/3.0'})
-webpage = urlopen(req, timeout=10).read()
+response = response.json()
 
-page_soup = soup(urlopen(req, timeout=10).read(), "lxml")
-
-print(page_soup)
-
-containers = page_soup.findAll("div", {"class": "answer-given-body ugc-base"})
-
-print(containers)
+print(response['joke'])
