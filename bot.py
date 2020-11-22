@@ -30,6 +30,7 @@ async def ping(context):
     await context.message.channel.send(f'{round(client.latency * 1000)}ms')
 
 @client.command(name='clear', help='To delete a specified amount of messages.')
+@commands.has_permissions(manage_messages=True)
 async def clear(context, amount: int):
     await context.channel.purge(limit=amount)
 
@@ -37,6 +38,8 @@ async def clear(context, amount: int):
 async def clear_error(context, error):
     if isinstance(error, commands.MissingRequiredArgument):
         await context.message.channel.send("Please specify the amount of messages")
+    if isinstance(error, commands.MissingPermissions):
+        await context.message.channel.send("You do not have permission to Manage Messages")
 
 @client.command(name='problem', help='To get your daily coding problem')
 async def search(context):
