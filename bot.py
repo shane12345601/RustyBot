@@ -15,6 +15,14 @@ async def meme(context):
     response = response.json()
     await context.message.channel.send(response['url'])
 
+@client.command(name='loli', help='The best time of your life')
+async def loli(context):
+    if context.channel.is_nsfw():
+        response = requests.get('https://api.lolis.life/random?nsfw=true')
+        temp = response.json()['url']
+        await context.message.channel.send(f'{temp}')
+    else:
+        await context.message.channel.send(f'You need to be in a NSFW channel')
 
 @client.command(name='joke', help='For random joke')
 async def joke(context):
@@ -106,7 +114,8 @@ async def search_error(context, error):
 async def on_ready():
     general_channel = client.get_channel(778697177915588610)
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="?help for commands"))
-    await general_channel.send("Pesheng weng weng")
+    #await general_channel.send("Pesheng weng weng")
+    print("rdy")
 
 @client.event
 async def on_command_error(context, error):
