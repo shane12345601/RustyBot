@@ -1,9 +1,8 @@
 import discord
 from discord.ext import commands, tasks
-#import pornhub_api
-#from pornhub_api import PornhubApi
 import imaplib, email, quopri, requests
 from pornhub.pornhub_api import PornhubApi
+import random
 
 api = PornhubApi()
 
@@ -18,12 +17,15 @@ async def meme(context):
 @client.command(name='loli', help='The best time of your life')
 async def loli(context):
     if context.channel.is_nsfw():
+        tags = ['blowjob', 'bj', 'boobs', 'cum', 'feet', 'hentai', 'wallpapers', 'spank', 'lesbian', 'lewd', 'pussy']
+        link = 'http://api.nekos.fun:8080/api/'
+        choice = random.choice(tags)
         try:
-            response = requests.get('https://api.lolis.life/random?nsfw=true')
-            temp = response.json()['url']
+            response = requests.get(link + choice)
+            temp = response.json()['image']
             await context.message.channel.send(f'{temp}')
         except:
-            print("Error from loli api")
+            print("Error with loli api")
     else:
         await context.message.channel.send(f'You need to be in a NSFW channel')
 
@@ -86,31 +88,34 @@ async def search(context):
 
 @client.command(name='search', help='To find porn')
 async def search(context, searchTerm):
-    data = api.search.search(q=searchTerm, ordering="mostviewed", period="weekly")
-    for i in range(5):
-        await context.message.channel.send(f'{i+1}. {data.videos[i].title}')
+    if context.channel.is_nsfw():
+        data = api.search.search(q=searchTerm, ordering="mostviewed", period="weekly")
+        for i in range(5):
+            await context.message.channel.send(f'{i+1}. {data.videos[i].title}')
 
-    await context.message.channel.send("Please send the number of the video for the url: ")
+        await context.message.channel.send("Please send the number of the video for the url: ")
 
-    msg = await client.wait_for(event="message")
+        msg = await client.wait_for(event="message")
 
-    if msg.content == "1":
-        await context.message.channel.send(f'URL for {data.videos[0].title}: {data.videos[0].url}')
+        if msg.content == "1":
+            await context.message.channel.send(f'URL for {data.videos[0].title}: {data.videos[0].url}')
 
-    elif msg.content == "2":
-        await context.message.channel.send(f'URL for {data.videos[1].title}: {data.videos[1].url}')
+        elif msg.content == "2":
+            await context.message.channel.send(f'URL for {data.videos[1].title}: {data.videos[1].url}')
 
-    elif msg.content == "3":
-        await context.message.channel.send(f'URL for {data.videos[2].title}: {data.videos[2].url}')
+        elif msg.content == "3":
+            await context.message.channel.send(f'URL for {data.videos[2].title}: {data.videos[2].url}')
 
-    elif msg.content == "4":
-        await context.message.channel.send(f'URL for {data.videos[3].title}: {data.videos[3].url}')
+        elif msg.content == "4":
+            await context.message.channel.send(f'URL for {data.videos[3].title}: {data.videos[3].url}')
 
-    elif msg.content == "5":
-        await context.message.channel.send(f'URL for {data.videos[4].title}: {data.videos[4].url}')
+        elif msg.content == "5":
+            await context.message.channel.send(f'URL for {data.videos[4].title}: {data.videos[4].url}')
 
+        else:
+            await context.message.channel.send("Invalid number! Search again.")
     else:
-        await context.message.channel.send("Invalid number! Search again.")
+        await context.message.channel.send(f'You need to be in a NSFW channel')
 
 
 @search.error

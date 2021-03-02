@@ -1,12 +1,20 @@
 import requests
+import random
+import pymongo
 
-link ='http://yoda-api.appspot.com/api/v1/yodish?text='
+tags = ['blowjob', 'bj', 'boobs', 'cum', 'feet', 'hentai', 'wallpapers', 'spank', 'lesbian', 'lewd', 'pussy']
 
-quote = "Shane is a shit riven"
+link ='http://api.nekos.fun:8080/api/'
 
-response = requests.get(f'http://yoda-api.appspot.com/api/v1/yodish?text={quote}')
+choice = random.choice(tags)
 
-response = response.json()
+try:
+    response = requests.get(link+choice)
+    temp = response.json()['image']
+    #await context.message.channel.send(f'{temp}')
+except:
+    print("Error with loli api")
 
-print(response['yodish'])
 
+client = pymongo.MongoClient("mongodb+srv://rustyAdmin:Neverever786@cluster0.ds0yx.mongodb.net/RustyBot?retryWrites=true&w=majority")
+db = client.test
