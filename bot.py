@@ -82,8 +82,8 @@ async def search(context):
         ebd.add_field(name='Problem: ', value=problem, inline=False)
 
         await context.message.channel.send(embed=ebd)
-    except:
-        print("Error")
+    except imaplib.IMAP4.error as e:
+        print("Error: ", e)
 
 
 @client.command(name='search', help='To find porn')
