@@ -57,31 +57,29 @@ async def clear_error(context, error):
 
 @client.command(name='problem', help='To get your daily coding problem')
 async def search(context):
-    try:
-        username = 'dailycodingproblems123@gmail.com'
-        password = 'Neverever786'
-        mail = imaplib.IMAP4_SSL("imap.gmail.com")
-        mail.login(username, password)
-        mail.select('"CodingProblems"')
-        result, data = mail.uid('search', None, "ALL")
-        msgs = data[0].split()
-        most_recent = msgs[-1]
-        result ,data = mail.uid('fetch', most_recent, '(RFC822)')
-        raw = data[0][1]
-        decoded = quopri.decodestring(raw)
-        emailMsg = email.message_from_bytes(decoded)
-        payload = emailMsg.get_payload()
-        sep = "printable"
-        stripped = payload.split(sep, 1)[1]
-        sep = "--------"
-        stripped = stripped.split(sep, 1)[0]
-        problem = stripped.strip()
-        ebd = discord.Embed(colour=discord.Colour.teal())
-        ebd.add_field(name='Problem: ', value=problem, inline=False)
+    username = 'dailycodingproblems123@gmail.com'
+    password = 'Neverever786'
+    mail = imaplib.IMAP4_SSL("imap.gmail.com")
+    mail.login(username, password)
+    mail.select('"CodingProblems"')
+    result, data = mail.uid('search', None, "ALL")
+    msgs = data[0].split()
+    most_recent = msgs[-1]
+    result ,data = mail.uid('fetch', most_recent, '(RFC822)')
+    raw = data[0][1]
+    decoded = quopri.decodestring(raw)
+    emailMsg = email.message_from_bytes(decoded)
+    payload = emailMsg.get_payload()
+    sep = "printable"
+    stripped = payload.split(sep, 1)[1]
+    sep = "--------"
+    stripped = stripped.split(sep, 1)[0]
+    problem = stripped.strip()
+    ebd = discord.Embed(colour=discord.Colour.teal())
+    ebd.add_field(name='Problem: ', value=problem, inline=False)
 
-        await context.message.channel.send(embed=ebd)
-    except imaplib.IMAP4.error as e:
-        print("Error: ", e)
+    await context.message.channel.send(embed=ebd)
+
 
 @client.command(name='search', help='To find porn')
 async def search(context, searchTerm):
