@@ -64,7 +64,6 @@ async def search(context):
         mail.login(username, password)
         mail.select('"CodingProblems"')
         result, data = mail.uid('search', None, "ALL")
-        print(data)
         msgs = data[0].split()
         most_recent = msgs[-1]
         result ,data = mail.uid('fetch', most_recent, '(RFC822)')
