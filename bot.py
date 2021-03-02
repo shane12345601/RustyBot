@@ -65,8 +65,8 @@ async def search(context):
     result, data = mail.uid('search', None, "ALL")
     msgs = data[0].split()
     most_recent = msgs[-1]
+    print(most_recent)
     result ,data = mail.uid('fetch', most_recent, '(RFC822)')
-    print(data)
     raw = data[0][1]
     decoded = quopri.decodestring(raw)
     emailMsg = email.message_from_bytes(decoded)
