@@ -61,7 +61,7 @@ async def clear_error(context, error):
 async def search(context):
     try:
         username = 'dailycodingproblems123@gmail.com'
-        password = 'Neverever786'
+        password = 'gqceujfzpnvxmhfq'
         mail = imaplib.IMAP4_SSL("imap.gmail.com")
         mail.login(username, password)
         mail.select('"CodingProblems"')
