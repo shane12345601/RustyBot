@@ -3,6 +3,9 @@ from discord.ext import commands, tasks
 import imaplib, email, quopri, requests
 from pornhub.pornhub_api import PornhubApi
 import random
+import os
+from dotenv import load_dotenv
+load_dotenv('.env')
 
 api = PornhubApi()
 
@@ -60,8 +63,8 @@ async def clear_error(context, error):
 @client.command(name='problem', help='To get your daily coding problem')
 async def search(context):
     try:
-        username = 'dailycodingproblems123@gmail.com'
-        password = 'gqceujfzpnvxmhfq'
+        username = os.getenv('emailEmail')
+        password = os.getenv('emailPassword')
         mail = imaplib.IMAP4_SSL("imap.gmail.com")
         mail.login(username, password)
         mail.select('"CodingProblems"')
@@ -136,4 +139,4 @@ async def on_command_error(context, error):
     if isinstance(error, commands.CommandNotFound):
         await context.message.channel.send("Invalid Command")
 
-client.run("Nzc4Njk1NDM2NzAxMjcwMDQ4.X7Vuow.eJQ6ADSDXmqeeqigA3Xgr-2WH4I")
+client.run(os.getenv('botToken'))
