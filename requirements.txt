@@ -9,6 +9,7 @@ idna==2.10
 lxml==4.6.1
 multidict==4.7.6
 git+https://github.com/Derfirm/pornhub-api
+python-dotenv==0.15.0
 pydantic==1.7.2
 requests==2.25.0
 soupsieve==2.0.1
